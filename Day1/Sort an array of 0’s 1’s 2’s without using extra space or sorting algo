@@ -1,0 +1,46 @@
+Input: [2,0,2,1,1,0]
+Output: [0,0,1,1,2,2]
+
+
+
+MY Solution:
+Time Complexity : O(n)
+Space Complexity : O(1)
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+        
+        int l = 0 , mid = 0, h = nums.size()-1;
+        while(mid <= h)
+        {
+            switch(nums[mid])
+            {
+                case 0 : 
+                    swap(nums[l++] , nums[mid++]);
+                    break;
+                    
+                case 1 :
+                    mid++;
+                    break;
+                    
+                case 2:
+                    swap(nums[mid],nums[h--]);
+                    break;
+            }
+        }
+    }
+};
+
+
+One pass Solution with less no of codes : O(2n) solution
+
+class Solution {
+    public:
+        void sortColors(int A[], int n) {
+            int second=n-1, zero=0;
+            for (int i=0; i<=second; i++) {
+                while (A[i]==2 && i<second) swap(A[i], A[second--]);
+                while (A[i]==0 && i>zero) swap(A[i], A[zero++]);
+            }
+        }
+    };
