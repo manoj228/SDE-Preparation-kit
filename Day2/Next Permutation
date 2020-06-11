@@ -1,0 +1,35 @@
+eg:
+1,2,3 → 1,3,2
+3,2,1 → 1,2,3
+1,1,5 → 1,5,1
+
+
+My solution (Optimal):
+Time complexity : O(n)
+Space Complexity : O(1)
+
+class Solution {
+public:
+    void nextPermutation(vector<int>& nums) {
+        next_permutation(nums.begin(), nums.end());
+    }
+};
+
+Another Optimal Solution :
+Time complexity : O(n)
+Space Complexity : O(1)
+
+void nextPermutation(vector<int>& nums) {
+    int i = nums.size() - 1, k = i;
+    while (i > 0 && nums[i-1] >= nums[i])
+        i--;
+    for (int j=i; j<k; j++, k--)
+        swap(nums[j], nums[k]);
+    if (i > 0) {
+        k = i--;
+        while (nums[k] <= nums[i])
+            k++;
+        swap(nums[i], nums[k]);
+    }
+}
+
