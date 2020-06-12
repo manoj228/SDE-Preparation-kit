@@ -1,0 +1,36 @@
+Example 1:
+
+Input: 3
+Output: 0
+Explanation: 3! = 6, no trailing zero.
+
+Example 2:
+
+Input: 5
+Output: 1
+Explanation: 5! = 120, one trailing zero.
+
+
+My optimal Solution :
+Time complexity : O(logn)
+space complexity : O(1)
+
+class Solution {
+public:
+    int trailingZeroes(int n) {
+        
+        int c = 0;
+        for(long long int i = 5; n/i >= 1 ; i*= 5)
+        {
+            c += n/i;
+        }
+        
+        return c;
+    }
+};
+
+Another optimal solution:
+Time complexity : O(logn)
+space complexity : O(1)
+
+return n == 0 ? 0 : n / 5 + trailingZeroes(n / 5);
