@@ -1,0 +1,67 @@
+Example:
+
+Given array nums = [1, 0, -1, 0, -2, 2], and target = 0.
+
+A solution set is:
+[
+  [-1,  0, 0, 1],
+  [-2, -1, 1, 2],
+  [-2,  0, 0, 2]
+]
+
+
+My solution :
+Time complexity : O(n^3)
+Space complexity : O(n^2)
+
+class Solution {
+public:
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+        
+        int n = nums.size();
+        sort(nums.begin(), nums.end());
+        vector<vector<int>> res;
+        if(n < 4) return res;
+        
+        for(int i=0; i<n-3;i++)
+        {
+            int p = target - nums[i];
+            for(int j=i+1; j<n-2;j++)
+            {
+                int q = p - nums[j];
+                int l = j+1 , r = n-1;
+                
+                while(l < r)
+                {
+                    if(nums[l]+nums[r]  < q)
+                    l++;
+                    
+                    else if(nums[l]+nums[r] > q)
+                    r--;
+                    
+                    else
+                    {
+                        vector<int> quadruplet(4, 0);
+                        quadruplet[0] = nums[i];
+                        quadruplet[1] = nums[j];
+                        quadruplet[2] = nums[l];
+                        quadruplet[3] = nums[r];
+                        res.push_back(quadruplet);
+                        
+                        while(l < r && nums[l] == quadruplet[2]) ++l;
+                        
+                         while(l < r && nums[r] == quadruplet[3]) --r;
+                    }
+                }
+                
+                
+                 while(j + 1 < nums.size() && nums[j + 1] == nums[j]) ++j;
+            }
+             while(i + 1 < nums.size() && nums[i + 1] == nums[i]) ++i;
+        }
+        
+        
+        return res;
+            
+    }
+};
