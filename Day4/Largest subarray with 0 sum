@@ -1,0 +1,33 @@
+Input
+8
+15 -2 2 -8 1 7 10 23
+
+Output
+5
+
+
+My solution :
+Time complexity : O(n)
+space complexity : O(n)
+
+int maxLen(int a[], int n) {
+    // Your code here
+    int s = 0 , m= 0;
+    unordered_map<int,int> mp;
+    
+    for(int i=0; i<n; i++)
+    {
+        s += a[i];
+        
+        if(a[i] == 0 && m == 0) 
+        m = 1;
+        if(s == 0)  m = i+1;
+        
+        if(mp.find(s) != mp.end())
+        m = max(m, i-mp[s]);
+        else
+        mp[s] = i;
+    }
+    
+    return m;
+}
