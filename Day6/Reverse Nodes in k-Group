@@ -1,0 +1,87 @@
+Example:
+
+Given this linked list: 1->2->3->4->5
+
+For k = 2, you should return: 2->1->4->3->5
+
+For k = 3, you should return: 3->2->1->4->5
+
+My solution :
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode *reverse(ListNode *head)
+    {
+        ListNode *next = NULL , *cur = head, *prev = NULL ;
+        
+        while(cur)
+        {            
+            next = cur -> next ;
+            cur -> next = prev;
+            prev = cur;
+            cur = next;
+        }
+        
+        head = prev;
+        
+        return head;
+    }
+    ListNode* reverseKGroup(ListNode* head, int k) {
+        
+        if(!head)
+            return head;
+        
+        ListNode *p = head , *q = NULL , *r = head;
+        for(int i=0;i<k-1;i++)
+        {
+            p = p->next;
+            if(!p)
+                break;
+        }
+        if(!p)
+            return head;
+        
+        q = reverseKGroup(p->next,k);
+        p -> next = NULL;
+        head = reverse(head);
+        r -> next = q;
+        
+        return head;
+    }
+};
+
+Another optimal solution:
+
+class Solution {
+public:
+    ListNode *reverseKGroup(ListNode *head, int k) {
+        if(head==NULL||k==1) return head;
+        int num=0;
+        ListNode *preheader = new ListNode(-1);
+        preheader->next = head;
+        ListNode *cur = preheader, *nex, *pre = preheader;
+        while(cur = cur->next) 
+            num++;
+        while(num>=k) {
+            cur = pre->next;
+            nex = cur->next;
+            for(int i=1;i<k;++i) {
+                cur->next=nex->next;
+                nex->next=pre->next;
+                pre->next=nex;
+                nex=cur->next;
+            }
+            pre = cur;
+            num-=k;
+        }
+        return preheader->next;
+    }
+};
