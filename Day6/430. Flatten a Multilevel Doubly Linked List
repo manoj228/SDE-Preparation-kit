@@ -1,0 +1,71 @@
+Example 1:
+
+Input: head = [1,2,3,4,5,6,null,null,null,7,8,9,10,null,null,11,12]
+Output: [1,2,3,7,8,11,12,9,10,4,5,6]
+
+My solution :
+
+
+/*
+// Definition for a Node.
+class Node {
+public:
+    int val;
+    Node* prev;
+    Node* next;
+    Node* child;
+};
+*/
+
+class Solution {
+public:
+    Node* flatten(Node* head) {
+        
+        if(!head)
+            return head;
+        
+       Node *flat_itr = head;
+        int count = 0;
+        while ( flat_itr != NULL ) {
+            Node *next_itr = flat_itr->next;
+            if (flat_itr->child != NULL) {
+                Node *flatten_child = flatten(flat_itr->child);
+                
+                flat_itr->child = NULL;
+                flat_itr->next = flatten_child;
+                flatten_child->prev = flat_itr;
+                
+                Node *child_end = flatten_child;
+                while (child_end->next != NULL)
+                    child_end = child_end->next;
+                
+                if (next_itr != NULL)
+                    next_itr->prev = child_end;
+                child_end->next = next_itr;
+            }
+            flat_itr = next_itr;
+        }
+        
+        return head;
+    }
+};
+
+Optimal solution:
+
+Node* flatten(Node* head) {
+	for (Node* h = head; h; h = h->next)
+	{
+		if (h->child)
+		{
+			Node* next = h->next;
+			h->next = h->child;
+			h->next->prev = h;
+			h->child = NULL;
+			Node* p = h->next;
+			while (p->next) p = p->next;
+			p->next = next;
+			if (next) next->prev = p;
+		}
+	}
+	return head;
+}
