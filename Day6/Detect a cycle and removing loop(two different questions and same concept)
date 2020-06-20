@@ -1,0 +1,60 @@
+Input:
+2
+3
+1 3 4
+2
+4
+1 8 3 4
+0
+Output:
+1
+1
+
+My solution :
+
+int detectAndRemoveLoop(struct Node* list) 
+{ 
+    struct Node *slow_p = list, *fast_p = list; 
+  
+    while (slow_p && fast_p && fast_p->next) { 
+        slow_p = slow_p->next; 
+        fast_p = fast_p->next->next; 
+  
+        /* If slow_p and fast_p meet at some point then there 
+           is a loop */
+        if (slow_p == fast_p) { 
+            removeLoop(slow_p, list); 
+  
+            /* Return 1 to indicate that loop is found */
+            return 1; 
+        } 
+    } 
+  
+    /* Return 0 to indeciate that ther is no loop*/
+    return 0; 
+} 
+  
+
+void removeTheLoop(Node *head)
+{
+     //Your code here
+    Node *slow = head, *fast = head;
+    while(slow && fast && fast -> next)
+    {
+        slow = slow -> next;
+        fast = fast -> next -> next;
+    
+    if(slow == fast)
+    break;
+
+    }
+     
+     if(slow == fast){
+         slow=head;
+         while(slow->next!=fast->next){
+             slow=slow->next;
+             fast=fast->next;
+        }
+        fast->next=NULL;
+}
+}
