@@ -1,0 +1,51 @@
+Input: head = [3,2,0,-4], pos = 1
+Output: tail connects to node index 1
+Explanation: There is a cycle in the linked list, where tail connects to the second node.
+
+Time complexity : O(n)
+Space compelxity : O(1)
+My optimal Solution :
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode *detectCycle(ListNode *head) {
+        
+        if(!head)
+            return head;
+        
+        ListNode *slow = head , *fast = head;
+        int  f=0;
+        
+        while(fast && fast -> next)
+        {
+            slow = slow -> next;
+            fast = fast -> next -> next;
+    
+            if(fast == slow)
+            {
+             f=1;
+             break;
+            }
+        }
+        if(f==0)
+        return NULL;
+        
+        slow = head;
+        
+        while(slow != fast)
+        {
+            slow = slow -> next;
+            fast = fast -> next;
+        }
+        
+        return slow;
+    }
+};
