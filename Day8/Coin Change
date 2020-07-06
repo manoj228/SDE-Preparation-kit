@@ -1,0 +1,52 @@
+Example 1:
+
+Input: coins = [1, 2, 5], amount = 11
+Output: 3 
+Explanation: 11 = 5 + 5 + 1
+Example 2:
+
+Input: coins = [2], amount = 3
+Output: -1
+
+
+My optimal solution:
+
+int coinReduce(int* coins, int coinsSize,int amount,int* arr)
+{
+    int i =0;
+    int temp =0;
+    int k = 0;
+    int min = INT_MAX;
+    int res = 0;
+    if(amount < 0)
+    {
+        return -1;
+    }
+    else if(amount == 0)
+    {
+        return 0;
+    }
+    else if(arr[amount] != 0)
+    {
+        return arr[amount];
+    }
+    for(i=0;i<coinsSize;i++)
+    {
+        res = coinReduce(coins,coinsSize,amount-coins[i],arr);
+        if((res>=0) && (res < min))
+        {
+            min = res+1;
+        }
+    }
+    arr[amount] = (min == INT_MAX) ? -1 : min;
+    return arr[amount];
+}
+    
+
+int coinChange(int* coins, int coinsSize, int amount)
+{    
+    int i =0;
+    int* arr = (int*)calloc(1,sizeof(int)*(amount+1)); 
+    coinReduce(coins,coinsSize,amount,arr);
+    return arr[amount];
+}
