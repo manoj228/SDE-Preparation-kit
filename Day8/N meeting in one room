@@ -1,0 +1,74 @@
+Input:
+2
+6
+1 3 0 5 8 5
+2 4 6 7 9 9
+8
+75250 50074 43659 8931 11273 27545 50879 77924
+112960 114515 81825 93424 54316 35533 73383 160252  
+
+Output:
+1 2 4 5
+6 7 1
+
+My optimal solution :
+
+//Time complexity : O(n logn)
+
+#include <bits/stdc++.h>
+using namespace std;
+
+struct meet
+{
+    int st ;
+    int end;
+    int pos;
+};
+
+bool cmp(struct meet a,struct meet b)
+{
+   return (a.end < b.end);
+}
+
+int main() {
+	//code
+	int t;
+	cin >> t;
+	while(t--)
+	{
+	    int n;
+	    cin >> n;
+	    int s[n] , f[n];
+	    for(int i=0; i<n; i++) cin >> s[i];
+	    for(int i=0; i<n; i++) cin >> f[i];
+	    
+	    struct meet m[n];
+	    for(int i=0; i<n; i++)
+	    {
+	        m[i].st = s[i];
+	        m[i].end = f[i];
+	        m[i].pos = i+1;
+	    }
+	    
+	    sort(m,m+n,cmp);
+	    
+	    vector<int> res;
+	    
+	    res.push_back(m[0].pos);
+	    
+	    int tl = m[0].end;
+	    for(int i=1; i<n; i++)
+	    {
+	        if(m[i].st >= tl)
+	        {
+	            tl = m[i].end;
+	            res.push_back(m[i].pos);
+	        }
+	    }
+	    
+	    for(int i=0; i<res.size(); i++)
+	    cout << res[i] << " ";
+	    cout << endl;
+	}
+	return 0;
+}
