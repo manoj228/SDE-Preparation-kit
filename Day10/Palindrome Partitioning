@@ -1,0 +1,43 @@
+class Solution {
+public:
+    bool checkForPalindrome(string s,int st,int e)
+    {
+        while(st <= e)
+        {
+            if(s[st] != s[e]) return false;
+            st++,e--;
+        }
+        
+        return true;
+    }
+    
+    void call(string s,int index, vector<vector<string>> &res,vector<string> &ans)
+    {
+        if(index == s.size())
+        {
+            res.push_back(ans);
+            return;
+        }
+        
+        for(int i=index; i<s.size(); i++)
+        {
+            if(checkForPalindrome(s,index,i))
+            {
+                ans.push_back(s.substr(index, i-index+1));
+                call(s,i+1,res,ans);
+                ans.pop_back();
+            }
+        }
+    }
+    
+    vector<vector<string>> partition(string s) {
+        int n = s.size();
+        vector<vector<string>> res;
+        vector<string> ans;
+        if(n == 0) return res;
+        
+        call(s,0,res,ans);
+        
+        return res;
+    }
+};
