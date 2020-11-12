@@ -1,0 +1,35 @@
+// time complexity : O(logn)
+// space complexity :: O(1)
+
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+int binarySearch(double x, int n)
+{
+	double low = 0.0 , high = x;
+	
+	while(high - low >= 0.0019)
+	{
+		double mid = (low + high)/2;
+		
+		if(mid == low || mid == high) 
+		break;
+		
+		if(pow(mid,n) < x) low = mid;
+		else 
+		high = mid;
+	}
+	
+	return low;
+}
+
+int main() {
+	
+    double x = 5 ;
+    int n = 3;
+    
+   cout << binarySearch(x, n);
+	
+	return 0;
+}
