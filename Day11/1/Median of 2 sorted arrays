@@ -1,5 +1,7 @@
 // 1) Two arrays of Same size
-
+// 2) Two arrays of different size
+ 
+1)  Same size
 // time complexity : O(logn)
 // space complexity : O(1)
 #include<bits/stdc++.h> 
@@ -49,4 +51,53 @@ int main()
 	return 0; 
 } 
 
+
+// 2) Two arrays of different sizes
+
+#include <bits/stdc++.h>
+using namespace std;
+
+double call(vector<int> a, int n,vector<int> b,int m,int start,int end,int total)
+{
+	if(start <= end)
+	{
+		int xpart = start + (end - start) / 2;
+		int ypart = total - xpart;
+	
+		
+		// left should be max and right should be min
+		int xleft = (xpart <= 0) ? INT_MIN : a[xpart - 1];
+		int xright = (xpart >= n) ? INT_MAX : a[xpart];
+		int yleft = (ypart <= 0) ? INT_MIN : b[ypart - 1];
+		int yright = (ypart >= m) ? INT_MAX: b[ypart];
+		
+		if(xleft <= yright && yleft <= xright)
+		{
+			return (n+m) % 2 == 0 ? ((double)max(xleft,yleft) + min(xright, yright)) / 2 
+			                       : ((double) max(xleft, yleft));
+		}
+		
+		else if(xleft > yright)
+		{
+			return call(a,n,b,m,start,xpart-1,total);
+		}
+		
+		else 
+		return call(a,n,b,m,xpart+1,end,total);
+	}
+}
+
+int main() {
+
+    vector<int> a = {2, 3, 5, 8} , b = {10, 12, 14, 16, 18, 20};
+    int n = a.size(), m = b.size();
+    
+    int tot = (m + n + 1) / 2;
+    if(n < m)
+    cout << call(a,n,b,m,0,n,tot);
+    else 
+    cout << call(b,m,a,n,0,m,tot);
+        
+	return 0;
+}
 
