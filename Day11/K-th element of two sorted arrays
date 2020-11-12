@@ -1,0 +1,59 @@
+// Time complexity : O(k)
+// space complexity : O(1)
+#include <bits/stdc++.h> 
+using namespace std; 
+
+int find(int a[], int b[], int m, int n, int k_req) 
+{ 
+	int k = 0, i = 0, j = 0; 
+
+	while(i < m && j < n) 
+	{ 
+		if(a[i] < b[j]) 
+		{ 
+			k++; 
+			if(k == k_req) 
+				return a[i]; 
+			i++; 
+		} 
+		else
+		{ 
+			k++; 
+			if(k == k_req) 
+				return b[j]; 
+			j++; 
+		} 
+	} 
+
+	while(i < m) 
+	{ 
+		k++; 
+		if(k == k_req) 
+			return a[i]; 
+		i++; 
+	} 
+
+	while(j < n) 
+	{ 
+		k++; 
+		if(k == k_req) 
+			return b[j]; 
+		j++; 
+	} 
+} 
+
+// Driver Code 
+int main() 
+{ 
+	int a[] = { 2, 3, 6, 7, 9 }; 
+	int b[] = { 1, 4, 8, 10 }; 
+	
+	int m = sizeof(a) / sizeof(a[0]);
+	int n = sizeof(b) / sizeof(b[0]);
+	int k = 5;  
+	
+	cout << find(a, b, m, n, k); 
+	
+	return 0; 
+} 
+
