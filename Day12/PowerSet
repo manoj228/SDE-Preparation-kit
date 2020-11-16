@@ -1,0 +1,38 @@
+PowerSet : 
+         It is a set of subsets of elements in an array 
+         
+        
+Example :
+Input : abc
+Output : a ab abc ac b bc c
+
+#include <bits/stdc++.h>
+using namespace std;
+
+void callPowerSet(string str,int n,int idx, string cur)
+{
+	if(idx == n) return;
+	
+	cout << cur <<  " ";
+	
+	for(int i=idx+1; i<n; i++)
+	{
+		cur += str[i];
+		
+		callPowerSet(str, n, i, cur);
+		
+		cur = cur.erase(cur.size()-1);
+	}
+	return;
+}
+
+int main() {
+	// your code goes here
+	string s;
+	cin >> s;
+	
+	sort(s.begin(), s.end());
+	callPowerSet(s,s.size(),-1,"");
+	
+	return 0;
+}
