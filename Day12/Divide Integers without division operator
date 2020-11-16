@@ -1,0 +1,44 @@
+Input : a = 10, b = 3
+Output : 3
+
+Input : a = 43, b = -8
+Output :  -5
+
+// time complexity : O(log(a)) , where a is the dividend
+// Space complexity : O(1) 
+#include <bits/stdc++.h>
+#define ll long long
+using namespace std;
+
+ll callDivide(ll a,ll b)
+{
+  ll asign = (a < 0) ? -1 : 1;
+  ll bsign = (b < 0) ? -1 : 1;
+  
+  ll sign = asign * bsign;
+  
+  a = abs(a) , b = abs(b);
+  
+  long long res = 0, t = 0;
+  for(int i=31; i>=0; i--)
+  {
+  	if(t + (b << i) <= a)
+  	{
+  		t += b << i;
+  		res |= 1LL << i;
+  	}
+  }
+  return res*sign;
+  
+}
+
+int main() {
+	// your code goes here
+	
+	ll a,b ;
+	cin >> a >> b;
+	
+    cout << callDivide(a,b) ;
+	
+	return 0;
+}
