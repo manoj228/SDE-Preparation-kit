@@ -1,0 +1,33 @@
+Input : 4 
+output: Yes , it is a power of 2
+
+Input : 3 
+output : No
+
+Explanation : 4 - 1000  
+              (4 - 1) - 0111
+              n & (n-1) == 0 // if its a power of 2 , it will be zero
+ 
+
+
+// Time & Space complexity : O(1)
+
+#include <bits/stdc++.h>
+using namespace std;
+
+bool check(int n)
+{
+	return n && (!(n&(n-1)));
+}
+
+int main() {
+	// your code goes here
+	
+	int n ;
+	cin >> n;
+	
+	if(check(n)) cout << "Yes , it is a power of 2";
+	else cout << "No";
+	
+	return 0;
+}
