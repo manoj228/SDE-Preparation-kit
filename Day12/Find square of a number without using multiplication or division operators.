@@ -1,0 +1,27 @@
+// time complexity : O(logn)
+// space complexity : O(1)
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int callSquare(int n)
+{
+	if(n == 0) return 0;
+	
+	int t = n >> 1;
+	
+	if(n % 2 == 1)
+	return ((callSquare(t) << 2) + (t << 2) + 1);
+	else
+	return (callSquare(t) << 2);
+}
+
+int main() {
+	// your code goes here
+	int n;
+	cin >> n;
+	
+	cout << callSquare(n);
+	
+	return 0;
+}
