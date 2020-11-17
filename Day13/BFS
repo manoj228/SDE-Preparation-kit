@@ -1,0 +1,69 @@
+INPUT : 
+adding edge between the vertices
+OUTPUT : 
+Breadth First Traversal : 
+0 1 2 3 
+
+// Time complexity : O(H) where H is height of tree
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Example
+{
+	public : 
+	int v ;
+	list<int> *adj;
+	 
+	Example(int v)
+	{
+		this->v = v;
+		adj = new list<int>[v];
+	}
+	
+	void add(int u,int v)
+	{
+		adj[u].push_back(v);
+	}
+	
+	void bfs(int s)
+	{
+		vector<bool> vis(v,false);
+		
+		queue<int> q;
+		q.push(s);
+		vis[s] = true;
+		
+		while(!q.empty())
+		{
+			s = q.front(); q.pop();
+			
+			cout << s << " ";
+			
+      // inserting the non - visited adjacent elements
+			for(auto it = adj[s].begin(); it != adj[s].end(); it++)
+			{
+				if(!vis[*it])
+				{
+				vis[*it] = true;
+				q.push(*it);
+				}
+			}
+		}
+	}
+};
+
+int main() {
+	Example ex(4);
+	ex.add(0,1);
+	ex.add(0,2);
+	ex.add(1,2);
+	ex.add(2,0);
+	ex.add(2,3);
+	ex.add(3,3);
+	
+	cout << "Breadth First Traversal : " << endl;
+	ex.bfs(0);
+	
+	return 0;
+}
