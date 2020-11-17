@@ -1,3 +1,7 @@
+Input : 1 , 2 , 3 , 4 // push into stack 
+output : 4 3 // top of the stack 
+
+
 #include <bits/stdc++.h>
 using namespace std;
 
