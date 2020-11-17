@@ -19,7 +19,7 @@ class Queuedemo
 	{
 		if(back == MAX) 
 		{
-			cout << "Stack Overflow";
+			cout << "Overflow";
 		    return;
 		}
 		else
@@ -29,7 +29,7 @@ class Queuedemo
 	void pop()
 	{
 		if(front == back) {
-			cout << "Stack is Empty";
+			cout << "Queue is Empty";
 		    return ;
 		}
 		else
