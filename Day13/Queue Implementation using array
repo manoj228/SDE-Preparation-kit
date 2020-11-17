@@ -1,0 +1,71 @@
+Queue (First In First Out) :
+Eg : 1 , 2 , 3 , 4 // push into queue
+     1 // top of queue 
+     2 // after deleting, new top element
+
+#include <bits/stdc++.h>
+using namespace std;
+
+const int MAX = 100;
+class Queuedemo
+{
+	public : 
+	int front,back ;
+	int a[MAX];
+	
+	Queuedemo(){ front = back = 0;}
+	
+	void push(int data)
+	{
+		if(back == MAX) 
+		{
+			cout << "Stack Overflow";
+		    return;
+		}
+		else
+		a[back++] = data;
+	}
+	
+	void pop()
+	{
+		if(front == back) {
+			cout << "Stack is Empty";
+		    return ;
+		}
+		else
+		{
+			for (int i = 0; i < back - 1; i++) { 
+                a[i] = a[i + 1]; 
+            }
+            back--;
+		}
+	}
+	
+	int top()
+	{
+		if(front == back) {
+			cout << "Stack is Empty ";
+		    return -1;
+		}
+		else
+			return a[front];
+		
+		
+	}
+	
+	
+};
+
+int main() {
+	Queuedemo sd;
+	sd.push(1);
+	sd.push(2);
+	sd.push(3);
+	sd.push(4);
+	
+	cout << sd.top() << endl;
+	sd.pop();
+	cout << sd.top() << endl;
+	
+	return 0;
+}
