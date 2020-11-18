@@ -6,7 +6,7 @@ O/p :
 25 -> -1
 2 -> -1
 
-// Time & Spae complextity : O(n)
+// Time & Space complextity : O(n)
 #include <bits/stdc++.h>
 using namespace std;
 
