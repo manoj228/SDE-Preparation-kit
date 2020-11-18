@@ -1,0 +1,50 @@
+I/p : {6, 2, 5, 4, 5, 1, 6}.
+O/p : 12
+
+
+// Time & Space complextity : O(n)
+#include <bits/stdc++.h>
+using namespace std;
+
+int maxArea(vector<int> a,int n)
+{
+	stack<int> s;
+	int res = 0, i = 0;
+	
+	while(i < n)
+	{
+		if(s.empty() || a[s.top()] <= a[i])
+		s.push(i++);
+		
+		else{
+			int tempIdx = s.top(); s.pop();
+			
+			int curArea = a[tempIdx] * (s.empty() ? i : (i - s.top() - 1));
+			
+		
+			res = max(res, curArea);
+			
+		}
+	}
+	
+	while(!s.empty())
+	{
+			int tempIdx = s.top(); s.pop();
+			
+			int curArea = a[tempIdx] * (s.empty()) ? i : (i - s.top() - 1);
+			
+			res = max(res, curArea);
+	}
+	
+	return res;
+	
+}
+
+int main() {
+	vector<int> a{6, 2, 5, 4, 5, 1, 6}; 
+	
+	cout << maxArea(a,a.size());
+
+
+	return 0;
+}
