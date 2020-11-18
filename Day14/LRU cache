@@ -1,0 +1,62 @@
+I/p : 1 2 3 1 4 5
+O/p : 5 4 1 3 
+
+// Time & Space complextity : O(n)
+#include <bits/stdc++.h>
+using namespace std;
+
+class LRU
+{
+	public : 
+	list<int> dq;
+	unordered_map<int, list<int>::iterator> mp;
+	int capacity;
+	
+	LRU(int n)
+	{
+		capacity = n;
+	}
+	
+	void refer(int data)
+	{
+		if(mp.find(data) != mp.end())
+		{
+			dq.erase(mp[data]);
+		}
+		else
+		{
+			if(capacity == dq.size())
+			{
+				int back = dq.back();
+				dq.pop_back();
+				mp.erase(back);
+			}
+		}
+		
+		// updating 
+		dq.push_front(data);
+		mp[data] = dq.begin();
+	}
+	
+	void display()
+	{
+		for(auto val : dq)
+		{
+			cout << val << " ";
+		}
+	}
+};
+
+int main() {
+	LRU l(4);
+	
+	  l.refer(1);
+    l.refer(2);
+    l.refer(3);
+    l.refer(1);
+    l.refer(4);
+    l.refer(5);
+    l.display();
+	
+	return 0;
+}
