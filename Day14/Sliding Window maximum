@@ -2,7 +2,7 @@ i/p : { 12, 1, 78, 90, 57, 89, 56 };
 o/p : 78 90 90 90 89 
 
 // Time complextity : O(n)
-// Space complexity : O(1)
+// Space complexity : O(k)
 #include <bits/stdc++.h>
 using namespace std;
 
