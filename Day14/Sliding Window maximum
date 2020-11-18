@@ -1,0 +1,44 @@
+i/p : { 12, 1, 78, 90, 57, 89, 56 };
+o/p : 78 90 90 90 89 
+
+// Time complextity : O(n)
+// Space complexity : O(1)
+#include <bits/stdc++.h>
+using namespace std;
+
+void callMax(vector<int> a,int n,int k)
+{
+	deque<int> dq;
+	
+	for(int i=0; i<k; i++)
+	{
+		while(!dq.empty() && a[dq.back()] <= a[i]) dq.pop_back();
+		
+		dq.push_back(i);
+	}
+	
+	
+	for(int i = k; i<n; i++)
+	{
+		cout << a[dq.front()] << " ";
+		
+		// remove the index which are not part of the current window
+		while(!dq.empty() && dq.front() <= i-k) dq.pop_front();
+		
+		while(!dq.empty() && a[dq.back()] <= a[i]) dq.pop_back();
+		
+		dq.push_back(i);
+	}
+	
+	cout << a[dq.front()] << " ";
+}
+
+
+int main() {
+	vector<int> a { 12, 1, 78, 90, 57, 89, 56 };
+	int k = 3;
+	
+	callMax(a,a.size(),k);
+	
+	return 0;
+}
