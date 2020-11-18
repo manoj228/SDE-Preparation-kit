@@ -1,0 +1,50 @@
+I/p : [4, 8, 5, 2, 25}
+O/p :
+8 -> 5
+5 -> 2
+4 -> 2
+25 -> -1
+2 -> -1
+
+// Time & Spae complextity : O(n)
+#include <bits/stdc++.h>
+using namespace std;
+
+void call(vector<int> a,int n)
+{
+	stack<int> s;
+	
+	s.push(a[0]);
+	
+	for(int i=1; i<n; i++)
+	{
+		if(s.empty())
+		{
+			s.push(a[i]);
+			continue;
+		}
+		
+		while(!s.empty() && s.top() > a[i])
+		{
+			cout << s.top() << " -> " << a[i] << endl;
+			s.pop();
+		}
+		
+		s.push(a[i]);
+	}
+	
+	while(!s.empty() )
+		{
+			cout << s.top() << " -> " << "-1" << endl;
+			s.pop();
+		}
+}
+
+int main() {
+	// your code goes here
+	vector<int> a{4, 8, 5, 2, 25};
+	
+	call(a,a.size());
+	
+	return 0;
+}
