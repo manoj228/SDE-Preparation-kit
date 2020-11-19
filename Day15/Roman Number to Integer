@@ -1,0 +1,35 @@
+i/p : I
+o/p : 1
+
+// Time complexity : O(n)
+// space complexity : O(1)
+int call(char c)
+{
+    switch(c)
+    {
+        case 'I': return 1;
+        case 'V': return 5;
+        case 'X': return 10;
+        case 'L': return 50;
+        case 'C': return 100;
+        case 'D': return 500;
+        case 'M': return 1000;
+    }
+    
+    return -1;
+}
+
+int romanToDecimal(string &str) {
+
+int s = 0 , cur = 0;
+for(int i=str.size()-1; i>=0; i--)
+{
+    if(call(str[i]) >= cur) s += call(str[i]);
+    else s -= call(str[i]);
+    
+    cur = call(str[i]);
+}
+
+return s;
+
+}
